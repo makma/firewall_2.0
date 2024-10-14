@@ -1,7 +1,3 @@
-Here's a polished and formalized version of the guidelines you provided, formatted for a README in markdown:
-
----
-
 # Firewall 2.0: Account Takeover Protection at the Edge
 
 ## Introduction
