@@ -8,6 +8,47 @@ Here's a polished and formalized version of the guidelines you provided, formatt
 
 The traditional understanding of firewalls is outdated. Conditional decision-making based on static data points such as IP addresses, script tags, query analysis, ASN detection, and other similar methods still have value, but they fall short in today’s web environment. Modern web technologies allow us to extend firewall protection beyond the old-fashioned `IF IP=X THEN 403` approach.
 
+Here is the updated section about Firewall 1.0 and Firewall 2.0:
+
+---
+
+## Firewall 1.0 vs. Firewall 2.0
+
+### 1. Firewall 1.0: Fingerprint Data as a Trigger for WAF Rules
+
+The traditional approach to firewall security—**Firewall 1.0**—involves consuming Fingerprint data on the server, lambda function, or worker. This method leverages standard WAF (Web Application Firewall) APIs to create and enforce rules. Here's how it works:
+
+- When specific data points from Fingerprint (such as a high fraud score) are recognized as malicious or suspicious based on the business's preferences, a firewall rule is created.
+- This rule is then deployed using the platform's WAF API (for example, blocking requests from a specific IP address or ASN).
+- The firewall rules are responsible for blocking future malicious requests at the WAF level.
+
+**Requirements:**
+- A platform that supports lambdas, workers, or origin server-based logic.
+- A WAF with an API that allows dynamic rule creation.
+
+This approach still relies on the platform's ability to enforce firewall rules at the server level, and while effective, it has limitations when dealing with sophisticated threats that can bypass static rule-based detection.
+
+### 2. Firewall 2.0: A Modern, Independent Approach
+
+**Firewall 2.0** offers an alternative (and complementary) method to the standard WAF-based approach. Rather than creating static WAF rules, all requests to the protected origin are proxied through a cybersecurity platform (e.g., Cloudflare Workers). Fingerprint data is assessed **at the proxy level**, meaning that malicious requests are intercepted **before** reaching the origin server.
+
+- Fingerprint data is assessed dynamically in the worker or lambda, making a real-time decision on whether to forward the request to the origin server.
+- If a request is flagged as malicious, it is not forwarded to the origin, and no firewall rules need to be created.
+- **Key advantage**: No request reaches the origin server, reducing the risk of fraud or attacks that could reach the server level.
+
+In this model, the worker or lambda effectively acts as the first line of defense, preventing fraud before it even has a chance to interact with your backend infrastructure. This method is independent of the platform's WAF capabilities and does not require creating or maintaining firewall rules.
+
+**Requirements:**
+- A platform capable of proxying all requests to the origin server (such as Cloudflare or Akamai).
+- The ability to hide the origin server's IP address, ensuring that all requests are assessed before they reach the origin.
+- A worker or lambda function that can dynamically evaluate requests based on Fingerprint data before forwarding them.
+
+By shifting decision-making to the edge, **Firewall 2.0** reduces the burden on backend infrastructure and enhances security by making dynamic, context-aware decisions based on real-time data.
+
+---
+
+This section contrasts the old and new approaches, highlighting how Firewall 2.0 brings more flexibility and real-time decision-making to request handling. Let me know if you'd like further adjustments!
+
 ### Solution
 
 This guide demonstrates how to implement account takeover protection using a modern firewall solution—before traffic even reaches your origin server. At the edge, we will utilize device intelligence data provided by [Fingerprint](https://fingerprint.com), enabling dynamic decisions such as blocking, flagging, logging, or challenging requests based on browser and environment analysis. Rather than relying on static IP-based rules (or similar), this method adapts in real-time based on dynamic context.
