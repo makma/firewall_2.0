@@ -12,7 +12,7 @@ The traditional understanding of firewalls is outdated. Conditional decision-mak
 
 The traditional approach to firewall security—**Firewall 1.0**—involves consuming Fingerprint data on the server, lambda function, or worker. This method leverages standard WAF (Web Application Firewall) APIs to create and enforce rules. Here's how it works:
 
-- When specific data points from Fingerprint (such as a high fraud score) are recognized as malicious or suspicious based on the business's preferences, a firewall rule is created.
+- When specific data points from Fingerprint are recognized as malicious or suspicious based on the business's preferences, a firewall rule is created.
 - This rule is then deployed using the platform's WAF API (for example, blocking requests from a specific IP address or ASN).
 - The firewall rules are responsible for blocking future malicious requests at the WAF level.
 
