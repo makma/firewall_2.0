@@ -41,8 +41,6 @@ By shifting decision-making to the edge, **Firewall 2.0** reduces the burden on 
 
 ---
 
-This section contrasts the old and new approaches, highlighting how Firewall 2.0 brings more flexibility and real-time decision-making to request handling. Let me know if you'd like further adjustments!
-
 ### Solution
 
 This guide demonstrates how to implement account takeover protection using a modern firewall solution—before traffic even reaches your origin server. At the edge, we will utilize device intelligence data provided by [Fingerprint](https://fingerprint.com), enabling dynamic decisions such as blocking, flagging, logging, or challenging requests based on browser and environment analysis. Rather than relying on static IP-based rules (or similar), this method adapts in real-time based on dynamic context.
