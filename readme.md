@@ -4,8 +4,6 @@
 
 The traditional understanding of firewalls is outdated. Conditional decision-making based on static data points such as IP addresses, script tags, query analysis, ASN detection, and other similar methods still have value, but they fall short in today’s web environment. Modern web technologies allow us to extend firewall protection beyond the old-fashioned `IF IP=X THEN 403` approach.
 
-Here is the updated section about Firewall 1.0 and Firewall 2.0:
-
 ---
 
 ## Firewall 1.0 vs. Firewall 2.0
